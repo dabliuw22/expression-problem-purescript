@@ -2,6 +2,7 @@ module Solution
   ( Add(..)
   , Expr(..)
   , Coproduct(..)
+  , Div(..)
   , Mul(..)
   , Val(..)
   , class Injector
@@ -10,10 +11,12 @@ module Solution
   , evaluate
   , eval
   , add
+  , div
   , mul
   , value
   , (⊕)
   , (⊗)
+  , (÷)
   ) where
 
 import Prelude
@@ -119,3 +122,18 @@ mul :: forall f. (Injector Mul f) => Expr f -> Expr f -> Expr f
 mul x y = inject (Mul x y)
 
 infixl 5 mul as ⊗
+
+data Div v
+  = Div v v
+
+instance divFunctor :: Functor Div where
+  map f (Div x y) = Div (f x) (f y)
+
+instance divEval :: Eval Div where
+  evaluate :: Div Int -> Int
+  evaluate (Div x y) = x / y
+
+div :: forall f. (Injector Div f) => Expr f -> Expr f -> Expr f
+div x y = inject (Div x y)
+
+infixl 5 div as ÷
