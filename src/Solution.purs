@@ -19,16 +19,8 @@ module Solution
   , (÷)
   ) where
 
-import Prelude
-  ( class Functor
-  , map
-  , identity
-  , (<<<)
-  , (<$>)
-  , (+)
-  , (*)
-  , (/)
-  )
+import Math (pow)
+import Prelude (class Functor, map, identity, (<<<), (<$>), (+), (*), (/))
 
 -- Define a special "In" type that hides the next
 -- `Expr` type from the actual data type
@@ -105,7 +97,7 @@ value i = inject (Val i)
 add :: forall f. (Injector Add f) => Expr f -> Expr f -> Expr f
 add x y = inject (Add x y)
 
-infixl 4 add as ⊕
+infixl 6 add as ⊕
 
 -- Extension
 data Mul v
@@ -121,7 +113,7 @@ instance mulEval :: Eval Mul where
 mul :: forall f. (Injector Mul f) => Expr f -> Expr f -> Expr f
 mul x y = inject (Mul x y)
 
-infixl 5 mul as ⊗
+infixl 7 mul as ⊗
 
 data Div v
   = Div v v
@@ -136,4 +128,4 @@ instance divEval :: Eval Div where
 div :: forall f. (Injector Div f) => Expr f -> Expr f -> Expr f
 div x y = inject (Div x y)
 
-infixl 5 div as ÷
+infixl 7 div as ÷
