@@ -38,7 +38,11 @@ main = do
 
     divExample :: Expr (Coproduct Val (Coproduct Add (Coproduct Mul Div)))
     divExample = value 80 ⊗ value 5 ⊕ value 4 ÷ value 2
+
+    oterExample :: Expr (Coproduct Val (Coproduct Add (Coproduct Mul Div)))
+    oterExample = value 80 ⊗ value 5 ⊕ value 4 ÷ value 2 ÷ value 2 ⊕ value 2000
   log (show $ eval addExample2)
   log (show $ eval addExample)
   log (show $ eval mulExample)
   log (show $ eval divExample)
+  log (show $ eval oterExample)
